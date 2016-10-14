@@ -6,9 +6,9 @@ import utils.Utilities;
  * Created by WataruS on 10/13/2016.
  */
 public class People {
-    private static int index;
-    private static String name;
-    private static String phoneNumber;
+    private  int index;
+    private  String name;
+    private  String phoneNumber;
 
     public People(int index, String name, String phoneNumber){
         setIndex(index);
@@ -16,31 +16,39 @@ public class People {
         setPhoneNumber(phoneNumber);
     }
 
-    public static int getIndex() {
+    public int getIndex() {
         return index;
     }
 
-    public static void setIndex(int index) {
-        People.index = index;
+    public void setIndex(int index) {
+        this.index = index;
     }
 
-    public static String getName() {
+    public String getName() {
         return name;
     }
 
-    public static void setName(String name) {
-        People.name = name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public static String getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public static void setPhoneNumber(String phoneNumber) {
+    public  void setPhoneNumber(String phoneNumber) {
         if (Utilities.isNumber(phoneNumber) && (phoneNumber.length()== 10)){
-            People.phoneNumber = phoneNumber;
+            this.phoneNumber = phoneNumber;
         } else {
-            People.phoneNumber = "NOT_DEFINE";
+            this.phoneNumber = "NOT_DEFINE";
         }
     }
+
+    @Override
+    public String toString(){
+
+        return "Name: " + this.name + " - Phone Number: " + this.phoneNumber;
+    }
+
+
 }
