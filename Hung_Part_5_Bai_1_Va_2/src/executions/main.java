@@ -3,14 +3,12 @@ package executions;
 import business.Hung_Part_5_Bai_1;
 import business.Hung_Part_5_Bai_2;
 import model.People;
-import sun.awt.image.ImageWatched;
 import utils.FileHandlers;
 import utils.HashMapHandlers;
 import utils.Utilities;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -44,13 +42,15 @@ public class main {
 
     private static void searchByPhoneNumber(FileHandlers fh, Scanner sc) throws IOException {
         String isContinue = "";
+        //Loading file content to a hashmap collection to search faster
         HashMap<String, People> hm = HashMapHandlers.getHashMapFromFile(fh.getFilePath().toString());
+        //Loading file content to a List collection to keep the insertion orders
         List<People> peopleListFromFile = fh.getPeopleListFromFile();
         do {
             System.out.print("Input a number to search: ");
             String searchNumber = Utilities.validateInputPhoneNumber(sc);
 
-
+            //calling search method
             People searchResult = Hung_Part_5_Bai_2.search(hm, searchNumber);
 
             if (searchResult == null) {
@@ -65,7 +65,6 @@ public class main {
                 modifyNameByPhoneNUmber(hm, peopleListFromFile, searchResult, sc);
             }
 
-
             System.out.println("Do you want to search another phone number? Press N to stop");
             System.out.print("Input your choice here: ");
             isContinue = Utilities.validateInputString(sc);
@@ -73,11 +72,13 @@ public class main {
         } while (!isContinue.toLowerCase().equals("n"));
 
         System.out.println("Updating data source file (Bai5.txt)...");
+        //write the content of people list in memory back to data source file
         fh.writeListPeopleToFile(peopleListFromFile, false);
         System.out.println("Done!");
 
     }
 
+    //Modify Name attribute of People object in hashmap and List
     private static void modifyNameByPhoneNUmber(HashMap<String, People> hm, List<People> peopleListFromFile, People people, Scanner sc) {
         System.out.print("Do you want to update contact name for this phone number? (y/n)");
         String answer = Utilities.validateInputString(sc);

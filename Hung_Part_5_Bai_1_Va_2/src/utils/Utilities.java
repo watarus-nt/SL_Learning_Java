@@ -8,6 +8,8 @@ import java.util.Scanner;
  */
 public class Utilities {
 
+    //Generate random phone number with length is inputted by user
+    //Phone number will be build from random digits (From 0 to 9)
     public static String generateRandomNumberWithInputLength(int length) {
         Random random = new Random();
         char[] digits = new char[length];
@@ -19,6 +21,8 @@ public class Utilities {
         return (new String(digits));
     }
 
+    //Generate random name with length is inputted by user
+    //name will be built from random alphabet characters
     public static String generateRandomName(int length) {
         char[] name = new char[length];
         name[0] = (char) (randomAlphabetCharacter() - 32);
@@ -28,6 +32,7 @@ public class Utilities {
         return (new String(name));
     }
 
+    //create random character base on ASCII code for alphabet character
     private static char randomAlphabetCharacter () {
         Random random = new Random();
         int num = random.nextInt(26);

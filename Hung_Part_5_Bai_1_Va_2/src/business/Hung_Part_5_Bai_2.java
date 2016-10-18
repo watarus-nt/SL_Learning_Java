@@ -1,7 +1,6 @@
 package business;
 
 import model.People;
-import utils.FileHandlers;
 
 import java.util.HashMap;
 
@@ -13,18 +12,8 @@ public class Hung_Part_5_Bai_2 {
         return hm.get(searchText);
     }
 
-
-    public static void addNewRecord(FileHandlers fh, People people){
-
-    }
-
-    public static void updateNameToFile(FileHandlers fh, People people, String newName){
-
-        people.setName(newName);
-
-    }
-
 /*
+    //Just for comparision during development
     public static void bai2_useList(String searchText) {
         FileHandlers fh = new FileHandlers("Bai5.txt");
         List<String> content = fh.readFile();
