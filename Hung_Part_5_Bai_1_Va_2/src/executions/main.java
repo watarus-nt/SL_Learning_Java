@@ -3,12 +3,15 @@ package executions;
 import business.Hung_Part_5_Bai_1;
 import business.Hung_Part_5_Bai_2;
 import model.People;
+import sun.awt.image.ImageWatched;
 import utils.FileHandlers;
 import utils.HashMapHandlers;
 import utils.Utilities;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -30,49 +33,23 @@ public class main {
                 System.out.println("Using the existing content for searching");
             }
         } else {
+            System.out.println("Creating new Bai5.txt file with random content.");
             fh.createFile();
             Hung_Part_5_Bai_1.bai1(fh, false);
         }
 
-        do {
-
-            System.out.println("1. Search Name by phone Number");
-            System.out.println("2. Search Then Modify Name");
-
-
-            String choice;
-            do {
-                System.out.print("Input your choice: ");
-                //assign user input to input variable after validating
-                choice = Utilities.validateInputString(sc);
-
-                if (!Utilities.isNumber(choice)) {
-                    System.out.println("Your input is not valid one. Please input again.");
-                } else
-                    break;
-            } while (true);
-
-            switch (Integer.parseInt(choice)){
-                case 1:
-                    searchByPhoneNumber(fh, sc);
-                    break;
-            }
-
-            System.out.println("\n----------------------------------------------------------------------------\n");
-            System.out.println("Do you want to continue? Press N to stop, other to continue...");
-            System.out.print("Please give your answer: ");
-            //assign user input to input variable after validating
-            isContinue = Utilities.validateInputString(sc);
-        } while (!(isContinue.toLowerCase().equals("n")));
+        searchByPhoneNumber(fh, sc);
 
     }
 
     private static void searchByPhoneNumber(FileHandlers fh, Scanner sc) throws IOException {
         String isContinue = "";
+        HashMap<String, People> hm = HashMapHandlers.getHashMapFromFile(fh.getFilePath().toString());
+        List<People> peopleListFromFile = fh.getPeopleListFromFile();
         do {
             System.out.print("Input a number to search: ");
             String searchNumber = Utilities.validateInputPhoneNumber(sc);
-            HashMap<String, People> hm = HashMapHandlers.getHashMapFromFile(fh.getFilePath().toString());
+
 
             People searchResult = Hung_Part_5_Bai_2.search(hm, searchNumber);
 
@@ -82,9 +59,10 @@ public class main {
                 String newName = Utilities.generateRandomName(5);
                 System.out.println("Adding that number with a random name to data source");
                 System.out.println("Adding " + searchNumber + "-" + newName + " to data source");
-                fh.writeToFile(searchNumber + "-" + newName, true);
+                fh.writeToFile("\n" + searchNumber + "-" + newName, true);
             } else {
                 System.out.println("Found " + searchResult);
+                modifyNameByPhoneNUmber(hm, peopleListFromFile, searchResult, sc);
             }
 
 
@@ -94,12 +72,23 @@ public class main {
             System.out.println("----------------------------------------------------------------------------");
         } while (!isContinue.toLowerCase().equals("n"));
 
+        System.out.println("Updating data source file (Bai5.txt)...");
+        fh.writeListPeopleToFile(peopleListFromFile, false);
+        System.out.println("Done!");
+
     }
 
-    private static void modifyNameByPhoneNUmber(FileHandlers fh, Scanner sc){
-        String isContinue = "";
-        do {
+    private static void modifyNameByPhoneNUmber(HashMap<String, People> hm, List<People> peopleListFromFile, People people, Scanner sc) {
+        System.out.print("Do you want to update contact name for this phone number? (y/n)");
+        String answer = Utilities.validateInputString(sc);
 
-        } while (!isContinue.toLowerCase().equals("n"));
+        if (answer.toLowerCase().equals("y")){
+            System.out.print("Input new contact name: ");
+            String newName = Utilities.validateInputString(sc);
+            people.setName(newName);
+            hm.put(people.getPhoneNumber(), people);
+            peopleListFromFile.set(people.getIndex(), people);
+            System.out.println("Updated - " + people );
+        }
     }
 }

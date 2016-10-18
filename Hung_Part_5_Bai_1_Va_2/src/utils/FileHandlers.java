@@ -63,6 +63,7 @@ public class FileHandlers {
             String[] info = line.split("-");
             String name = info[1];
             String phoneNumber = info[0];
+
             result.add(new People(index, name, phoneNumber));
             index++;
         }
@@ -87,12 +88,16 @@ public class FileHandlers {
         }
     }
 
-    public void writeToFile(HashMap hm, Boolean isAppend) {
+    public void writeListPeopleToFile(List<People> peopleList, Boolean isAppend) {
         try {
+            List<String> newContent = new ArrayList<String>();
+            for (People people:peopleList){
+                newContent.add(people.getPhoneNumber() + "-" + people.getName());
+            }
             if (!isAppend) {
-                Files.write(this.filePath, hm.entrySet(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+                Files.write(this.filePath, newContent, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
             } else {
-                Files.write(this.filePath, hm.entrySet(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+                Files.write(this.filePath, newContent, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
             }
         } catch (IOException e) {
             e.printStackTrace();

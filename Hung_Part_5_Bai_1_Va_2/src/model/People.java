@@ -47,7 +47,7 @@ public class People {
     @Override
     public String toString(){
 
-        return "Name: " + this.name + " - Phone Number: " + this.phoneNumber;
+        return "Name: " + this.name + " - Phone Number: " + this.phoneNumber + " - Index: " + getIndex();
     }
 
 

@@ -51,6 +51,7 @@ public class HashMapHandlers {
             String[] info = line.split("-");
             People people = new People(index, info[1], info[0]);
             hm.put(info[0], people);
+            index++;
         }
         br.close();
         return hm;
