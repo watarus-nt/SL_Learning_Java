@@ -4,11 +4,12 @@ import utils.FileHandlers;
 import utils.HashMapHandlers;
 import utils.Utilities;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 public class Hung_Part_5_Bai_1 {
 
-    public static void bai1(FileHandlers fh, Boolean isAppend){
+    public static void bai1(FileHandlers fh, Boolean isAppend) throws IOException {
         // write your code here
         HashMap<String, String> hm = new HashMap<String, String>();
 
@@ -17,6 +18,8 @@ public class Hung_Part_5_Bai_1 {
             String value = Utilities.generateRandomName(5);//Value is a alphabet string with 5 characters
             HashMapHandlers.putNewElementToHashMap(hm, key, value);
         }
-            fh.writeToFile(HashMapHandlers.getHashMapElements(hm), isAppend);
+
+        HashMapHandlers.writeHashMapToFile(hm, fh.getFilePath().toString(), isAppend);
+
     }
 }

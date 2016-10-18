@@ -1,15 +1,14 @@
 package utils;
 
+import model.People;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by WataruS on 10/1/2016.
@@ -56,18 +55,22 @@ public class FileHandlers {
     }
 
 
-    public HashMap<String, String> createHashMapFromFile(){
-        HashMap<String, String> hm = new HashMap<String, String>();
+    public List<People> getPeopleListFromFile(){
         List<String> content = readFile();
+        List<People> result = new ArrayList<People>();
+        int index = 0;
+        for(String line:content){
+            String[] info = line.split("-");
+            String name = info[1];
+            String phoneNumber = info[0];
 
-        for (String line:content){
-            String key = line.split("-")[0].trim();
-            String value = line.split("-")[1].trim();
-            HashMapHandlers.putNewElementToHashMap(hm, key, value);
+            result.add(new People(index, name, phoneNumber));
+            index++;
         }
-
-        return hm;
+        return result;
     }
+
+
 
     public int countLineInFile() {
         return readFile().size();
@@ -79,6 +82,22 @@ public class FileHandlers {
                 Files.write(this.filePath, content, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
             } else {
                 Files.write(this.filePath, content, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void writeListPeopleToFile(List<People> peopleList, Boolean isAppend) {
+        try {
+            List<String> newContent = new ArrayList<String>();
+            for (People people:peopleList){
+                newContent.add(people.getPhoneNumber() + "-" + people.getName());
+            }
+            if (!isAppend) {
+                Files.write(this.filePath, newContent, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+            } else {
+                Files.write(this.filePath, newContent, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -125,16 +144,6 @@ public class FileHandlers {
 
     }
 
-    public String search(HashMap<String, String> hm, String searchText) throws FileNotFoundException {
-        String result = "";
-
-        result = hm.get(searchText);
-        if (result == null){
-            return "Not Found";
-        } else {
-            return result;
-        }
-    }
 
     public void init() {
         //Initial default data
