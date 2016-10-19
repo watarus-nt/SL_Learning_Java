@@ -26,6 +26,7 @@ public class main {
             System.out.print("Do you want to overwrite the existing content with new default content? (y/n)");
             isOverwrite = Utilities.validateInputString(sc);
             if (isOverwrite.equals("y")) {
+                System.out.println("Creating new random content for Bai5.txt file...");
                 Hung_Part_5_Bai_1.bai1(fh, false);
             } else {
                 System.out.println("Using the existing content for searching");
@@ -59,10 +60,13 @@ public class main {
                 String newName = Utilities.generateRandomName(5);
                 System.out.println("Adding that number with a random name to data source");
                 System.out.println("Adding " + searchNumber + "-" + newName + " to data source");
-                fh.writeToFile("\n" + searchNumber + "-" + newName, true);
+                People newContact = new People(peopleListFromFile.size(), newName, searchNumber);
+                hm.put(searchNumber, newContact);
+                peopleListFromFile.add(newContact);
+//                fh.writeToFile("\n" + searchNumber + "-" + newName, true);
             } else {
                 System.out.println("Found " + searchResult);
-                modifyNameByPhoneNUmber(hm, peopleListFromFile, searchResult, sc);
+                modifyNameByPhoneNumber(hm, peopleListFromFile, searchResult, sc);
             }
 
             System.out.println("Do you want to search another phone number? Press N to stop");
@@ -73,14 +77,16 @@ public class main {
 
         System.out.println("Updating data source file (Bai5.txt)...");
         //write the content of people list in memory back to data source file
+
         fh.writeListPeopleToFile(peopleListFromFile, false);
         System.out.println("Done!");
 
     }
 
     //Modify Name attribute of People object in hashmap and List
-    private static void modifyNameByPhoneNUmber(HashMap<String, People> hm, List<People> peopleListFromFile, People people, Scanner sc) {
-        System.out.print("Do you want to update contact name for this phone number? (y/n)");
+    private static void modifyNameByPhoneNumber(HashMap<String, People> hm, List<People> peopleListFromFile, People people, Scanner sc) {
+        System.out.println("Do you want to update contact name for this phone number? (y/n)");
+        System.out.print("Input your choice here: ");
         String answer = Utilities.validateInputString(sc);
 
         if (answer.toLowerCase().equals("y")){
