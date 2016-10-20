@@ -9,11 +9,39 @@ public class People {
     private  int index;
     private  String name;
     private  String phoneNumber;
+    private String team;
+    private String description;
+
+    public People(int index, String name, String phoneNumber, String team, String description){
+        setIndex(index);
+        setName(name);
+        setPhoneNumber(phoneNumber);
+        setTeam(team);
+        setDescription(description);
+    }
 
     public People(int index, String name, String phoneNumber){
         setIndex(index);
         setName(name);
         setPhoneNumber(phoneNumber);
+        setTeam(team);
+        setDescription(description);
+    }
+
+    public String getTeam() {
+        return team;
+    }
+
+    public void setTeam(String team) {
+        this.team = team;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getIndex() {
