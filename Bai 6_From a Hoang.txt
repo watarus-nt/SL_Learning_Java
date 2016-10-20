@@ -1,0 +1,36 @@
+Bài 1:
+Viết chương trình tạo file có cấu trúc dạng JSON như sau:
+{  
+   "Phú":
+	[  
+      {  
+         "team":"securelogix",
+         "phone":"09123456789",
+         "description":"handsome, baby, cute"
+      }
+   ]
+}
+
+hãy random như part 5 để tạo ra khoảng n struct như vậy tùy ý. Với tên random là tên của male.
+Note là mỗi struct load lên chương trình phải theo OOP tạo 1 class DaTa. Ngoài ra dựa và tính encapsulation để class có thể self update data trong file.
+
+Bài 2:
+Viết chươgn trình tạo file có cấu trúc dạng XML như sau:
+<?xml version="1.0" encoding="UTF-8"?>
+<Member>
+   <name>Quỳnh</name>
+   <relationship role="vợ">Phú</relationship>
+   <description>chằng tinh chính hiệu</description>
+</Member>
+
+hãy random như part 5 để tạo ra khoảng n struct như vậy tùy ý. Với tên random là tên của female. Role random là vợ, con, chau, người yêu, bồ nhí, bố mẹ, chồng, bạn trai ..etc...
+Note là mỗi struct load lên chương trình phải theo OOP tạo 1 class DaTa. Ngoài ra dựa và tính encapsulation để class có thể self update data trong file.
+
+Bài 3: 
+Viết chương trình để quản lý 2 file data của 2 bài phái trên. 
+Chương trình cho phép nhập vào số điện thoại sẽ tìm ra instance tên Phú, mang Phú đi tìm ra được vợ Phú tên Quỳnh. Vợ hay là con hiện ra lấy từ role lưu dưới xml.
+Chương trình cho phép thay đổi dự liệu của từng người trên data search ra được.
+Dùng Dictionary ( hashmap ) cho bài trên.
+
+Bài 4: 
+Giải quyết việc nếu Phú đi thay tên đổi họ để bỏ vợ tới với tình nhân khác thì cho dù anh có cố gắng nhưng vợ anh vẫn nhất quyết thay đổi theo tên mới của chồng.
