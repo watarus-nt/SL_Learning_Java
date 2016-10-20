@@ -60,6 +60,7 @@ public class main {
                 String newName = Utilities.generateRandomName(5);
                 System.out.println("Adding that number with a random name to data source");
                 System.out.println("Adding " + searchNumber + "-" + newName + " to data source");
+                System.out.println("Adding " + searchNumber + "-" + newName + " to data source");
                 People newContact = new People(peopleListFromFile.size(), newName, searchNumber);
                 hm.put(searchNumber, newContact);
                 peopleListFromFile.add(newContact);

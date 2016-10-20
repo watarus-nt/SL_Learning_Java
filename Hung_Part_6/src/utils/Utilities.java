@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- * Created by tranmanhhung on 10/12/2016.
+ * Created by tranmanhhung on 10/20/2016.
  */
 public class Utilities {
 

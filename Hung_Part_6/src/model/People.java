@@ -3,7 +3,7 @@ package model;
 import utils.Utilities;
 
 /**
- * Created by WataruS on 10/13/2016.
+ * Created by WataruS on 10/20/2016.
  */
 public class People {
     private  int index;
