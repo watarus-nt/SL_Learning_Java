@@ -10,13 +10,15 @@ public class People {
     private  String name;
     private  String phoneNumber;
     private String team;
+    private String sex;
     private String description;
 
-    public People(int index, String name, String phoneNumber, String team, String description){
+    public People(int index, String name, String phoneNumber, String team, String sex, String description){
         setIndex(index);
         setName(name);
         setPhoneNumber(phoneNumber);
         setTeam(team);
+        setSex(sex);
         setDescription(description);
     }
 
@@ -26,6 +28,14 @@ public class People {
         setPhoneNumber(phoneNumber);
         setTeam(team);
         setDescription(description);
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
     public String getTeam() {

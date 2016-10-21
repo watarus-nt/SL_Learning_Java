@@ -29,10 +29,10 @@ public class JsonHandlers {
 
 
         JsonHandlers jh = new JsonHandlers();
-        jh.addNewPerson("Phu", "securelogix", "0912345678", "description\",\"handsome, baby, cute");
-        jh.addNewPerson("Hung", "securelogix", "0938297100", "description\",\"handsome, baby, cute");
+        jh.addNewPerson("Phu", "securelogix", "0912345678", "unidentify", "description\",\"handsome, baby, cute");
+        jh.addNewPerson("Hung", "securelogix", "0938297100", "male", "description\",\"handsome, baby, cute");
 
-        jh.convertPeopleObjectToJsonObject(new People(3,"Watarus", "0938297100", "securelogix",
+        jh.convertPeopleObjectToJsonObject(new People(3,"Watarus", "0938297100", "securelogix", "male",
                                                       "description\",\"handsome, baby, cute"));
         jh.writeJsonObjectToFile();
 
@@ -40,20 +40,21 @@ public class JsonHandlers {
     }
 
     public JSONObject convertPeopleObjectToJsonObject(People people){
-        return addNewPerson(people.getName(), people.getTeam(), people.getPhoneNumber(), people.getDescription());
+        return addNewPerson(people.getName(), people.getTeam(), people.getPhoneNumber(), people.getSex(), people.getDescription());
     }
 
-    public JSONObject addNewPerson( String name, String team, String phone, String description){
-        JSONArray personDetails = addPersonDetails(team, phone, description);
+    public JSONObject addNewPerson( String name, String team, String phone, String sex, String description){
+        JSONArray personDetails = addPersonDetails(team, phone, sex, description);
         getObj().put(name, personDetails);
         return obj;
     }
 
-    public JSONArray addPersonDetails(String team, String phone, String description){
+    public JSONArray addPersonDetails(String team, String phone,String sex, String description){
         JSONArray jsonArray = new JSONArray();
         JSONObject details = new JSONObject();
         details.put("team", team);
         details.put("phone", phone);
+        details.put("sex", sex);
         details.put("description", description);
         jsonArray.add(details);
         return jsonArray;
